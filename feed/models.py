@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models
 
 
@@ -19,3 +20,11 @@ class Feed(models.Model):
         verbose_name = 'Новость'
         verbose_name_plural = 'Новости'
         
+        
+class UserReaction(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    feed = models.ForeignKey(Feed, on_delete=models.CASCADE)
+    is_like = models.BooleanField(default=False)
+    
+    class Meta:
+        unique_together = ('user', 'feed')

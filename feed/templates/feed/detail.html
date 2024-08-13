@@ -1,7 +1,7 @@
 {% extends 'feed/base.html' %}
 {% load static %}
 
-{% block title %}{{ article.title }} - News Today{% endblock %}
+{% block title %}{{ feed.title }} - News Today{% endblock %}
 
 {% block content %}
 <article class="news-detail">
@@ -18,7 +18,20 @@
             {{ feed.body }}
         </p>
     </div>
+    <br>
+    <div>
+        {% if user.is_authenticated %}
+            <a href="{% url 'feed:like_feed' feed.id %}" class="button" {% if user_reaction and user_reaction.is_like %} disabled {% endif %}>
+                👍 Like ({{ feed.likes }})
+            </a>
+            <a href="{% url 'feed:dislike_feed' feed.id %}" class="button" {% if user_reaction and not user_reaction.is_like %} disabled {% endif %}>
+                👎 Dislike ({{ feed.dislikes }})
+            </a>
+        {% else %}
+            <p>You must be logged in to like or dislike.</p>
+        {% endif %}
+    </div>
     <a href="{% url 'feed:home' %}" class="back-link">Back to Home</a> |
-    <a href="{{ feed.youtube_video_url }}" class="back-link" target="_blank">Go to post</a> 
+    <a href="{{ feed.youtube_video_url }}" class="back-link" target="_blank">Go to post</a>
 </article>
 {% endblock %}
