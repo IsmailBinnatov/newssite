@@ -1,0 +1,24 @@
+{% extends 'feed/base.html' %}
+{% load static %}
+
+{% block title %}{{ article.title }} - News Today{% endblock %}
+
+{% block content %}
+<article class="news-detail">
+    <img src="{{ feed.image }}" alt="">
+    <br>
+    <br>
+    <h2>{{ feed.title }}</h2>
+    <p>{{ feed.published_at }}</p>
+    <br>
+    <strong>{{ feed.view_count }} views</strong>
+    <div class="news-content">
+        <br>
+        <p>
+            {{ feed.body }}
+        </p>
+    </div>
+    <a href="{% url 'feed:home' %}" class="back-link">Back to Home</a> |
+    <a href="{{ feed.youtube_video_url }}" class="back-link" target="_blank">Go to post</a> 
+</article>
+{% endblock %}

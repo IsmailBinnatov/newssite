@@ -1,0 +1,22 @@
+{% extends 'feed/base.html' %}
+{% load static %}
+
+{% block title %}Home - News Today{% endblock %}
+
+{% block content %}
+<h2>Latest News</h2>
+<div class="news-list">
+    {% for feed in feeds %}
+    <article class="news-item">
+        <img src="{{ feed.image }}" alt="">
+        <br>
+        <br>
+        <h3><a href="{% url 'feed:detail' feed.id %}">{{ feed.title }}</a></h3>
+        <br>
+        <p style="margin-left: 30px">{{ feed.body|truncatechars:30 }}</p>
+        <strong style="margin-left: 30px; display: block">{{ feed.view_count }} views</strong>
+        <a href="{% url 'feed:detail' feed.id %}" class="read-more">Read more</a>
+    </article>
+    {% endfor %}
+</div>
+{% endblock %}
