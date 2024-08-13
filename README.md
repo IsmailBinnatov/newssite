@@ -1,1 +1,1 @@
-simple news site with views count, (likes, dislikes in future)
+simple news site with views count, likes & dislikes
